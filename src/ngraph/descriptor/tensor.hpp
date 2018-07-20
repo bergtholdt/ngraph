@@ -61,6 +61,8 @@ public:
     static std::string make_tensor_name(const Node* node, size_t value_index);
     PrimaryTensorView* get_primary_tensor_view() const { return m_primary_tensor_view; }
 protected:
+    void update_size();
+
     element::Type m_element_type;
     PrimaryTensorView* m_primary_tensor_view;
     std::string m_name;
