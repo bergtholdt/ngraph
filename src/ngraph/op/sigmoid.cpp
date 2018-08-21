@@ -35,6 +35,7 @@ op::Sigmoid::Sigmoid(shared_ptr<Node> arg)
     : UnaryElementwiseArithmetic("Sigmoid", {arg})
 {
     set_output_type(0, arg->get_element_type(), arg->get_shape());
+    constructor_validate_and_infer_types();
 }
 
 op::SigmoidBackprop::SigmoidBackprop(shared_ptr<Node> arg, shared_ptr<Node> delta)

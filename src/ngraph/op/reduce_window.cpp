@@ -32,6 +32,8 @@ op::ReduceWindow::ReduceWindow(const shared_ptr<Node>& arg_reductee,
     , m_window_shape(window_shape)
     , m_window_movement_strides(window_movement_strides)
 {
+    constructor_validate_and_infer_types();
+
     auto& input_reductee = get_inputs().at(0);
     auto& input_init = get_inputs().at(1);
     auto input_reductee_shape = input_reductee.get_shape();

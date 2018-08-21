@@ -31,6 +31,8 @@ op::Select::Select(const shared_ptr<Node>& arg0,
                    const shared_ptr<Node>& arg2)
     : RequiresTensorViewArgs("Select", NodeVector{arg0, arg1, arg2})
 {
+    constructor_validate_and_infer_types();
+
     auto& input_0 = get_inputs().at(0);
     auto& input_1 = get_inputs().at(1);
     auto& input_2 = get_inputs().at(2);

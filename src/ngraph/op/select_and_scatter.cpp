@@ -36,6 +36,8 @@ op::SelectAndScatter::SelectAndScatter(const shared_ptr<Node>& arg_selectee,
     , m_window_shape(window_shape)
     , m_window_movement_strides(window_movement_strides)
 {
+    constructor_validate_and_infer_types();
+
     auto& input_selectee = get_inputs().at(0);
     auto& input_source = get_inputs().at(1);
     auto& input_init = get_inputs().at(2);

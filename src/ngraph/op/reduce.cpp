@@ -29,6 +29,8 @@ op::Reduce::Reduce(const shared_ptr<Node>& arg_reductee,
     , m_reduction_function(reduction_function)
     , m_reduction_axes(reduction_axes)
 {
+    constructor_validate_and_infer_types();
+
     auto& input_reductee = get_inputs().at(0);
 
     auto& input_init = get_inputs().at(1);

@@ -86,7 +86,7 @@ namespace ngraph
 
         // Called in constructors during transition
         void constructor_validate_and_infer_types();
-    
+
         Node(const std::string& node_type, const NodeVector& arguments, size_t output_size = 1);
         virtual ~Node();
 

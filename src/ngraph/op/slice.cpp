@@ -28,6 +28,7 @@ op::Slice::Slice(const shared_ptr<Node>& arg,
     , m_upper_bounds(upper_bounds)
     , m_strides(strides)
 {
+    constructor_validate_and_infer_types();
 }
 
 op::Slice::Slice(const shared_ptr<Node>& arg,
@@ -38,6 +39,7 @@ op::Slice::Slice(const shared_ptr<Node>& arg,
     , m_upper_bounds(upper_bounds)
     , m_strides(Strides())
 {
+    constructor_validate_and_infer_types();
 }
 
 void op::Slice::validate_and_infer_types()

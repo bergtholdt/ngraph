@@ -25,6 +25,8 @@ op::OneHot::OneHot(const shared_ptr<Node>& arg, const Shape& shape, size_t one_h
     , m_shape(shape)
     , m_one_hot_axis(one_hot_axis)
 {
+    constructor_validate_and_infer_types();
+
     auto& input = m_inputs.at(0);
     auto& input_element_type = input.get_element_type();
 

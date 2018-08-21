@@ -33,6 +33,7 @@ op::ReverseSequence::ReverseSequence(const std::shared_ptr<Node> arg,
     , m_batch_axis(batch_axis)
     , m_seq_axis(seq_axis)
 {
+    constructor_validate_and_infer_types();
 }
 
 void op::ReverseSequence::validate_and_infer_types()

@@ -31,6 +31,8 @@ op::Pad::Pad(const shared_ptr<Node>& arg,
     , m_padding_above(padding_above)
     , m_padding_interior(padding_interior)
 {
+    constructor_validate_and_infer_types();
+
     if (get_input_element_type(0) != get_input_element_type(1))
     {
         throw ngraph_error("Pad argument tensor and padding value element types do not match");

@@ -44,6 +44,7 @@ runtime::cpu::op::ConvertLayout::ConvertLayout(
     , arg_output_index(output_index)
     , output_layout(layout)
 {
+    constructor_validate_and_infer_types();
 }
 
 void runtime::cpu::op::ConvertLayout::validate_and_infer_types()

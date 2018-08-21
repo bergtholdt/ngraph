@@ -31,6 +31,8 @@ op::ReplaceSlice::ReplaceSlice(const shared_ptr<Node>& arg0,
     , m_upper_bounds(upper_bounds)
     , m_strides(strides)
 {
+    constructor_validate_and_infer_types();
+
     check_args();
 }
 
@@ -43,6 +45,8 @@ op::ReplaceSlice::ReplaceSlice(const shared_ptr<Node>& arg0,
     , m_upper_bounds(upper_bounds)
     , m_strides(Strides(lower_bounds.size(), 1))
 {
+    constructor_validate_and_infer_types();
+
     check_args();
 }
 

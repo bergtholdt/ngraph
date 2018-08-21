@@ -38,46 +38,35 @@ void ngraph::op::BatchNorm::validate_and_infer_types()
     util::RequiresTensorViewArgs::validate_and_infer_types();
 
     m_bn_input_shape = get_input_shape(INPUT);
-    auto& et = get_input_element_type(INPUT);
-    auto in_size = get_input_size();
-    if (in_size > VARIANCE)
-    {
-        set_output_size(3);
-    }
-    else if (in_size > MEAN)
-    {
-        set_output_size(2);
-    }
-
-    set_output_type(0, et, m_bn_input_shape);
-
-    if (in_size > MEAN)
-    {
-        m_bn_mean_shape = get_input_shape(MEAN);
-        set_output_type(1, et, m_bn_mean_shape);
-    }
-
-    if (in_size > VARIANCE)
-    {
-        m_bn_variance_shape = get_input_shape(VARIANCE);
-        set_output_type(2, et, m_bn_variance_shape);
-    }
-
     if (m_bn_input_shape.size() < 2)
     {
         throw ngraph_error("input tensor to batchnorm must have tensor of at least rank 2");
     }
-    else
-    {
-        this->m_bn_variance_shape.push_back(m_bn_input_shape[1]);
-        this->m_bn_mean_shape.push_back(m_bn_input_shape[1]);
-    }
-
     if (m_bn_input_shape[1] == 0)
     {
-        throw ngraph_error(
-            "input tensor must have at least one channel axis for batch normalization");
+        throw ngraph_error("input tensor must have at least one channel for batch normalization");
     }
+
+    auto& et = get_input_element_type(INPUT);
+    auto in_size = get_input_size();
+    if (in_size == 3)
+    {
+        set_output_size(3);
+        this->m_bn_mean_shape.push_back(m_bn_input_shape[1]);
+        set_output_type(1, et, m_bn_mean_shape);
+        this->m_bn_variance_shape.push_back(m_bn_input_shape[1]);
+        set_output_type(2, et, m_bn_variance_shape);
+    }
+    else if (in_size == 5)
+    {
+        set_output_size(1);
+    }
+    else
+    {
+        throw ngraph_error("Invalid BatchNorm args");
+    }
+
+    set_output_type(0, et, m_bn_input_shape);
 
     Shape channel_shape{m_bn_input_shape[1]};
     const char* input_names[]{"gamma", "beta", "input", "mean", "variance"};

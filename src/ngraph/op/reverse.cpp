@@ -27,6 +27,7 @@ op::Reverse::Reverse(const shared_ptr<Node>& arg, const AxisSet& reversed_axes)
     : RequiresTensorViewArgs("Reverse", {arg})
     , m_reversed_axes(reversed_axes)
 {
+    constructor_validate_and_infer_types();
 }
 
 void op::Reverse::validate_and_infer_types()
