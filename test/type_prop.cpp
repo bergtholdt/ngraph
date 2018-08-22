@@ -69,9 +69,9 @@ TEST(type_prop, batchnorm_zero_channel_check)
     }
     catch (const ngraph_error& error)
     {
-        EXPECT_EQ(error.what(),
-                  std::string(
-                      "input tensor must have at least one channel axis for batch normalization"));
+        EXPECT_EQ(
+            error.what(),
+            std::string("input tensor must have at least one channel for batch normalization"));
     }
     catch (...)
     {
@@ -93,7 +93,8 @@ TEST(type_prop, batchnorm_et_check)
     catch (const ngraph_error& error)
     {
         EXPECT_EQ(error.what(),
-                  std::string("The element type of beta isn't equal to input data's type"));
+                  std::string("The element type element::Type{64, 1, 1,double} of input beta isn't "
+                              "equal to the input data's type element::Type{32, 1, 1,float}"));
     }
     catch (...)
     {
@@ -115,7 +116,8 @@ TEST(type_prop, batchnorm_shape_check)
     catch (const ngraph_error& error)
     {
         EXPECT_EQ(error.what(),
-                  std::string("The shape of gamma isn't equal to input channel's shape"));
+                  std::string(
+                      "The shape Shape{4} of gamma isn't equal to input channel's shape Shape{3}"));
     }
     catch (...)
     {
