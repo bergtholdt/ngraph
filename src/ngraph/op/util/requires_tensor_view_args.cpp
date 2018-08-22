@@ -34,5 +34,12 @@ op::util::RequiresTensorViewArgs::RequiresTensorViewArgs(const std::string& node
 void op::util::RequiresTensorViewArgs::validate_and_infer_types()
 {
     Op::validate_and_infer_types();
-    requires_single_output_args();
+    for (auto& i : get_inputs())
+    {
+        if (i.get_output().get_node()->get_output_size() != 1)
+        {
+            throw ngraph_error("Arguments for node type \"" + m_node_type +
+                               "\" must be tensor views");
+        }
+    }
 }

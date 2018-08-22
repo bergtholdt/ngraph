@@ -352,15 +352,3 @@ std::string ngraph::type_check_assert_string(const Node* node)
        << "'";
     return ss.str();
 }
-
-void Node::requires_single_output_args() const
-{
-    for (auto& i : get_inputs())
-    {
-        if (i.get_output().get_node()->get_output_size() != 1)
-        {
-            throw ngraph_error("Arguments for node type \"" + m_node_type +
-                               "\" must be tensor views");
-        }
-    }
-}
