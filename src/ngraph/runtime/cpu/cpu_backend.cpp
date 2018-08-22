@@ -17,6 +17,7 @@
 #include <tbb/tbb_stddef.h>
 
 #include "ngraph/graph_util.hpp"
+#include "ngraph/runtime/backend_manager.hpp"
 #include "ngraph/runtime/cpu/cpu_backend.hpp"
 #include "ngraph/runtime/cpu/cpu_call_frame.hpp"
 #include "ngraph/runtime/cpu/cpu_external_function.hpp"
@@ -26,22 +27,24 @@
 using namespace ngraph;
 using namespace std;
 
-extern "C" const char* get_ngraph_version_string()
-{
-    return NGRAPH_VERSION;
-}
-
-extern "C" runtime::Backend* new_backend(const char* configuration_string)
+runtime::Backend* new_backend(const char* configuration_string)
 {
     // Force TBB to link to the backend
     tbb::TBB_runtime_interface_version();
     return new runtime::cpu::CPU_Backend();
 }
 
-extern "C" void delete_backend(runtime::Backend* backend)
+static class NGRAPH_CPUStaticInit
 {
-    delete backend;
-}
+public:
+    NGRAPH_CPUStaticInit() { runtime::BackendManager::register_backend("CPU", new_backend); }
+    ~NGRAPH_CPUStaticInit() {}
+} s_init;
+
+// extern "C" void delete_backend(runtime::Backend* backend)
+// {
+//     delete backend;
+// }
 
 shared_ptr<runtime::cpu::CPU_CallFrame> runtime::cpu::CPU_Backend::make_call_frame(
     const shared_ptr<runtime::cpu::CPU_ExternalFunction>& external_function)

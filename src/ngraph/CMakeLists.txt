@@ -194,6 +194,10 @@ set_target_properties(ngraph PROPERTIES VERSION ${NGRAPH_VERSION} SOVERSION ${NG
 target_link_libraries(ngraph PUBLIC libjson)
 target_compile_definitions(ngraph PUBLIC NGRAPH_VERSION="${NGRAPH_VERSION}")
 
+if (NGRAPH_CPU_ENABLE)
+    target_link_libraries(ngraph PUBLIC -Wl,--whole-archive cpu_backend -Wl,--no-whole-archive)
+endif()
+
 if (NGRAPH_ONNX_IMPORT_ENABLE)
     add_dependencies(ngraph onnx_import)
 endif()
