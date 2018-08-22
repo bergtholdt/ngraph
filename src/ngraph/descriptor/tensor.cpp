@@ -30,17 +30,6 @@ descriptor::Tensor::Tensor(const element::Type& element_type,
     , m_name{name}
     , m_next_view_id{0}
 {
-    update_size();
-}
-
-void descriptor::Tensor::update_size()
-{
-    size_t size = m_element_type.size();
-    for (size_t s : m_primary_tensor_view->get_tensor_view_type()->get_shape())
-    {
-        size *= s;
-    }
-    m_size = size;
 }
 
 string descriptor::Tensor::make_tensor_name(const Node* node, size_t value_index)
@@ -79,7 +68,6 @@ size_t descriptor::Tensor::size() const
 void descriptor::Tensor::set_element_type(const element::Type& element_type)
 {
     m_element_type = element_type;
-    update_size();
 }
 
 ostream& operator<<(ostream& out, const descriptor::Tensor& tensor)
