@@ -37,7 +37,7 @@ op::BatchDot::BatchDot(shared_ptr<Node> a, shared_ptr<Node> b, bool transpose_a,
     , m_transpose_b(transpose_b)
 {
     constructor_validate_and_infer_types();
-    
+
     const auto& shape_a = a->get_shape();
     const auto& shape_b = b->get_shape();
     if (shape_a.size() != 3 || shape_b.size() != 3)

@@ -81,7 +81,7 @@ void ngraph::op::BatchNorm::validate_and_infer_types()
         {
             std::stringstream err_msg;
             err_msg << "The element type " << get_input_element_type(i) << " of input "
-                    << input_names[i] << "isn't equal to the input data's type " << et;
+                    << input_names[i] << " isn't equal to the input data's type " << et;
             throw ngraph_error(err_msg.str());
         }
 
@@ -183,6 +183,7 @@ ngraph::op::BatchNormBackprop::BatchNormBackprop(double eps,
 
 void ngraph::op::BatchNormBackprop::validate_and_infer_types()
 {
+    set_output_size(3);
     util::RequiresTensorViewArgs::validate_and_infer_types();
 
     if (get_input_shape(INPUT).size() != 4)
