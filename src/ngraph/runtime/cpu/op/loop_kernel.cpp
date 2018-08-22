@@ -68,6 +68,7 @@ ngraph::runtime::cpu::op::LoopKernel::LoopKernel(const NodeVector& node_list,
     , m_output_nodes(outputs)
 {
     constructor_validate_and_infer_types();
+    set_output_size(m_output_nodes.size());
 
     auto ref = node_list.at(0);
     for (auto n : node_list)
