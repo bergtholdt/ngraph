@@ -65,6 +65,8 @@ op::Rnn::Rnn(std::shared_ptr<Node> src_layer,
     , m_direction(direction)
     , m_num_fused_layers(num_fused_layers)
 {
+    constructor_validate_and_infer_types();
+
     if (src_layer->get_shape().size() != weights_layer->get_shape().size())
     {
         throw ngraph_error("src_layer and i2h weights size dont match");

@@ -36,6 +36,8 @@ op::MaxPoolWithIndices::MaxPoolWithIndices(const shared_ptr<Node>& arg,
     , m_padding_below(padding_below)
     , m_padding_above(padding_above)
 {
+    constructor_validate_and_infer_types();
+
     auto& arg_shape = get_input_shape(0);
 
     //
@@ -191,6 +193,8 @@ op::MaxPoolWithIndicesBackprop::MaxPoolWithIndicesBackprop(const shared_ptr<Node
     , m_padding_below(padding_below)
     , m_padding_above(padding_above)
 {
+    constructor_validate_and_infer_types();
+
     if (delta->get_shape() != indices->get_shape())
     {
         throw ngraph_error("delta shape doesn't match indices' ");

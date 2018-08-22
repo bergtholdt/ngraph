@@ -23,7 +23,7 @@ op::util::BinaryElementwiseArithmetic::BinaryElementwiseArithmetic(
     const std::string& node_type,
     const std::shared_ptr<Node>& arg0,
     const std::shared_ptr<Node>& arg1)
-    : BinaryElementwise(node_type, arg0->get_element_type(), arg0, arg1)
+    : BinaryElementwise(node_type, arg0, arg1)
 {
 }
 
@@ -39,4 +39,5 @@ void op::util::BinaryElementwiseArithmetic::validate_and_infer_types()
     {
         throw ngraph_error("Operands for arithmetic operators must have numeric element type");
     }
+    set_output_type(0, get_input_element_type(0), get_input_shape(0));
 }

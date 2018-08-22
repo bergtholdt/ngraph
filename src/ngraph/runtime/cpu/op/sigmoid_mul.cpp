@@ -58,6 +58,8 @@ op::SigmoidMultiply::SigmoidMultiply(shared_ptr<Node> input_0,
                                      const FunctionType input_1_type)
     : RequiresTensorViewArgs("SigmoidMultiply", {input_0, input_1})
 {
+    constructor_validate_and_infer_types();
+
     if (input_0->get_element_type() != input_1->get_element_type())
     {
         throw ngraph_error("SigmoidMultiply input element type mismatch");
@@ -110,6 +112,8 @@ op::SigmoidMultiplyBackprop::SigmoidMultiplyBackprop(std::shared_ptr<Node> input
     : RequiresTensorViewArgs("SigmoidMultiplyBackprop", {input_0, input_1, delta})
     , m_input_type(input_type)
 {
+    constructor_validate_and_infer_types();
+
     if (input_0->get_element_type() != input_1->get_element_type())
     {
         throw ngraph_error("Argument element types for SigmoidMultiply backprop do not match");

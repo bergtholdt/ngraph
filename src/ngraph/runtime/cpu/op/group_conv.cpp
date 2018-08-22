@@ -42,6 +42,8 @@ op::GroupConvolution::GroupConvolution(const shared_ptr<Node>& data_batch,
     , m_data_dilation_strides(data_dilation_strides)
     , m_groups(groups)
 {
+    constructor_validate_and_infer_types();
+
     auto& data_batch_et = data_batch->get_element_type();
     auto& filters_et = filters->get_element_type();
 

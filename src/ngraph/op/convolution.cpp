@@ -620,6 +620,7 @@ op::ConvolutionBackpropFilters::ConvolutionBackpropFilters(
     , m_padding_above_forward(padding_above_forward)
     , m_data_dilation_strides_forward(data_dilation_strides_forward)
 {
+    constructor_validate_and_infer_types();
 }
 
 void op::ConvolutionBackpropFilters::validate_and_infer_types()

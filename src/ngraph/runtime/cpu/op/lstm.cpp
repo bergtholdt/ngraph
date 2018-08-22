@@ -75,6 +75,8 @@ op::Lstm::Lstm(std::shared_ptr<Node> input_xt_1,
     , m_num_fused_layers(1)
     , m_fused_inputs(false)
 {
+    constructor_validate_and_infer_types();
+
     if (input_xt_1->get_shape().size() != i2h_weights->get_shape().size())
     {
         throw ngraph_error("input_xt_1 and i2h weights size dont match");
@@ -137,6 +139,8 @@ op::Lstm::Lstm(std::shared_ptr<Node> src_layer,
     , m_num_fused_layers(1)
     , m_fused_inputs(true)
 {
+    constructor_validate_and_infer_types();
+
     if (src_layer->get_shape().size() != weights_layer->get_shape().size())
     {
         throw ngraph_error("src_layer and i2h weights size dont match");

@@ -23,7 +23,6 @@ using namespace std;
 using namespace ngraph;
 
 op::util::BinaryElementwise::BinaryElementwise(const std::string& node_type,
-                                               const element::Type& result_element_type,
                                                const std::shared_ptr<Node>& arg0,
                                                const std::shared_ptr<Node>& arg1)
     : RequiresTensorViewArgs(node_type, NodeVector{arg0, arg1})

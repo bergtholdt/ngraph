@@ -61,6 +61,8 @@ op::ConvolutionBias::ConvolutionBias(const shared_ptr<op::Convolution>& conv,
     , m_data_dilation_strides(conv->get_data_dilation_strides())
     , m_with_relu(with_relu)
 {
+    constructor_validate_and_infer_types();
+
     if (conv->get_element_type() != bias->get_element_type())
     {
         throw ngraph_error("Convolution's element type isn't equal to bias!");
@@ -89,6 +91,8 @@ op::ConvolutionBias::ConvolutionBias(const shared_ptr<Node>& data_batch,
     , m_data_dilation_strides(data_dilation_strides)
     , m_with_relu(with_relu)
 {
+    constructor_validate_and_infer_types();
+
     auto& data_batch_shape = data_batch->get_shape();
     auto& data_batch_et = data_batch->get_element_type();
     auto& filters_shape = filters->get_shape();
@@ -199,6 +203,8 @@ op::ConvolutionBiasBackpropFiltersBias::ConvolutionBiasBackpropFiltersBias(
     , m_padding_above_forward(padding_above_forward)
     , m_data_dilation_strides_forward(data_dilation_strides_forward)
 {
+    constructor_validate_and_infer_types();
+
     auto& data_batch_shape = get_input_shape(0);
     auto& data_batch_et = get_input_element_type(0);
     auto& output_delta_et = get_input_element_type(1);
@@ -272,6 +278,8 @@ op::ConvolutionBiasAdd::ConvolutionBiasAdd(const std::shared_ptr<op::Convolution
     , m_data_dilation_strides(conv->get_data_dilation_strides())
     , m_with_relu(with_relu)
 {
+    constructor_validate_and_infer_types();
+
     util::validate_convbias_shapes(conv->get_argument(0)->get_shape(),
                                    conv->get_argument(1)->get_shape(),
                                    conv->get_argument(2)->get_shape());
@@ -296,6 +304,8 @@ op::ConvolutionBiasAdd::ConvolutionBiasAdd(const std::shared_ptr<Node>& data_bat
     , m_data_dilation_strides(data_dilation_strides)
     , m_with_relu(with_relu)
 {
+    constructor_validate_and_infer_types();
+
     auto& data_batch_shape = data_batch->get_shape();
     auto& data_batch_et = data_batch->get_element_type();
     auto& filters_shape = filters->get_shape();

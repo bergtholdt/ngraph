@@ -27,6 +27,8 @@ ngraph::op::BatchNormRelu::BatchNormRelu(double eps,
     , m_epsilon(eps)
     , m_training(true)
 {
+    constructor_validate_and_infer_types();
+
     if (m_bn_input_shape.size() != 4)
     {
         throw ngraph_error("input tensor to batchnorm must have rank 4");
@@ -91,6 +93,8 @@ ngraph::op::BatchNormRelu::BatchNormRelu(double eps,
     , m_epsilon(eps)
     , m_training(training)
 {
+    constructor_validate_and_infer_types();
+
     if (m_bn_input_shape.size() != 4)
     {
         throw ngraph_error("input tensor to batchnorm must have rank 4");

@@ -22,7 +22,7 @@ using namespace ngraph;
 op::util::BinaryElementwiseComparison::BinaryElementwiseComparison(const string& node_type,
                                                                    const shared_ptr<Node>& arg0,
                                                                    const shared_ptr<Node>& arg1)
-    : BinaryElementwise(node_type, element::boolean, arg0, arg1)
+    : BinaryElementwise(node_type, arg0, arg1)
 {
 }
 
@@ -34,4 +34,5 @@ void op::util::BinaryElementwiseComparison::validate_and_infer_types()
     {
         throw ngraph_error("Arguments must have the same tensor view element type");
     }
+    set_output_type(0, element::boolean, get_input_shape(0));
 }

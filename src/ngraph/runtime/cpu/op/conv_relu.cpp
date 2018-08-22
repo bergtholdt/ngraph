@@ -32,6 +32,7 @@ op::ConvolutionRelu::ConvolutionRelu(const std::shared_ptr<op::Convolution>& con
     , m_padding_above(conv->get_padding_above())
     , m_data_dilation_strides(conv->get_data_dilation_strides())
 {
+    constructor_validate_and_infer_types();
     set_output_type(0, conv->get_element_type(), conv->get_shape());
 }
 
@@ -49,6 +50,8 @@ op::ConvolutionRelu::ConvolutionRelu(const std::shared_ptr<Node>& data_batch,
     , m_padding_above(padding_above)
     , m_data_dilation_strides(data_dilation_strides)
 {
+    constructor_validate_and_infer_types();
+
     auto& data_batch_shape = data_batch->get_shape();
     auto& data_batch_et = data_batch->get_element_type();
     auto& filters_shape = filters->get_shape();
