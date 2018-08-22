@@ -110,7 +110,7 @@ void op::MatmulBias::validate_and_infer_types()
 
     if (have_b)
     {
-        NGRAPH_DEBUG << "b shape = " << vector_to_string(get_input_shape(3));
+        NGRAPH_DEBUG << "b shape = " << vector_to_string(get_input_shape(2));
     }
 
     set_output_type(0, et, dot_shape);
