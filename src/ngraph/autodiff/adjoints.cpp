@@ -76,13 +76,6 @@ autodiff::Adjoints::Adjoints(const NodeVector& ys, const NodeVector& cs)
                 "Adjoints for multi-output ops aren't supported directly.\nProvide deltas for "
                 "corresponding GetOutputElements instead");
         }
-#if 0
-        if (ys.at(i)->get_shape() != cs.at(i)->get_shape() ||
-            ys.at(i)->get_element_type() != cs.at(i)->get_element_type())
-        {
-            throw ngraph_error("delta and node shape or element type must match");
-        }
-#endif
     }
 
     // Pass 1 determines which nodes contribute to y as well as setting up a reverse

@@ -271,10 +271,18 @@ namespace ngraph
             }
         };
 
+        /// \brief A scalar constant whose element type is the same as like.
         template <typename T>
         class ScalarConstantLike : public ScalarConstantLikeBase
         {
         public:
+            /// \brief A scalar constant whose element type is the same as like.
+            ///
+            /// Once the element type is known, the dependency on like will be removed and
+            /// this node will be replaced with an equivalent constant.
+            ///
+            /// \param like A tensor that will supply the element type.
+            /// \param value The value of the scalar.
             ScalarConstantLike(const std::shared_ptr<Node>& like, T value)
                 : ScalarConstantLikeBase("ScalarConstantLike", {like})
                 , m_value(value)

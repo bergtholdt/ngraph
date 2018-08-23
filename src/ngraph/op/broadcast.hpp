@@ -59,9 +59,19 @@ namespace ngraph
             AxisSet m_broadcast_axes;
         };
 
+        /// \brief Broadcast arg to the same shape as like_arg.
         class BroadcastLike : public Broadcast
         {
         public:
+            /// \brief Broadcast arg to the same shape as like_arg.
+            ///
+            /// Once the shape of like_arg is known, this op will be replaced with an equivalent
+            /// Broadcast op.
+            ///
+            /// \param arg The argument to be broadcast.
+            /// \param like_arg Provides the shape for the result.
+            /// \param broadcast_axes indicates which axes will be broadcast. If empty,
+            /// arg must be scalar and all axes are broadcast.
             BroadcastLike(const std::shared_ptr<Node>& arg,
                           const std::shared_ptr<Node>& like_arg,
                           const AxisSet& broadcast_axes);
