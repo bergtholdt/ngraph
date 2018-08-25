@@ -58,6 +58,7 @@ public:
     const element::Type& get_element_type() const { return m_element_type; }
     void set_element_type(const element::Type& element_type);
     static std::string make_tensor_name(const Node* node, size_t value_index);
+
 protected:
     element::Type m_element_type;
     TensorView* m_tensor_view;
