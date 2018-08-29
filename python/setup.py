@@ -236,6 +236,7 @@ extra_compile_args = []
 extra_link_args = []
 
 data_files = [('lib', [NGRAPH_CPP_LIBRARY_DIR + "/" + library for library in os.listdir(NGRAPH_CPP_LIBRARY_DIR)]),]
+data_files = [] # ignore for conda
 
 ext_modules = [Extension(
                    '_pyngraph',
