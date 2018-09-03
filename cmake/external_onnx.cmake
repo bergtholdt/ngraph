@@ -110,10 +110,23 @@ set(ONNX_GIT_BRANCH rel-${ONNX_VERSION})
 # ExternalProject_Get_Property(ext_onnx SOURCE_DIR BINARY_DIR)
 find_package(ONNX)
 
+function(add_cloned_imported_target dst src)
+    add_library(${dst} INTERFACE IMPORTED)
+    foreach(name INTERFACE_LINK_LIBRARIES INTERFACE_INCLUDE_DIRECTORIES INTERFACE_COMPILE_DEFINITIONS INTERFACE_COMPILE_OPTIONS)
+        get_property(value TARGET ${src} PROPERTY ${name} )
+        set_property(TARGET ${dst} PROPERTY ${name} ${value})
+    endforeach()
+endfunction()
+
+# this does not work unfortunately
+# usin recipy from https://github.com/conan-io/conan/issues/2125
+# add_library(onnx::libonnx ALIAS onnx)
+# add_library(onnx::libonnx_proto ALIAS onnx_proto)
+
 if (NOT TARGET onnx::libonnx)
-    add_library(onnx::libonnx ALIAS onnx)
+    add_cloned_imported_target(onnx::libonnx onnx)
 endif()
 
 if (NOT TARGET onnnx::libonnx_proto)
-    add_library(onnx::libonnx_proto ALIAS onnx_proto)
+    add_cloned_imported_target(onnx::libonnx_proto onnx_proto)
 endif()
