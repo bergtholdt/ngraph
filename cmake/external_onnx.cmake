@@ -110,6 +110,8 @@ set(ONNX_GIT_BRANCH rel-${ONNX_VERSION})
 # ExternalProject_Get_Property(ext_onnx SOURCE_DIR BINARY_DIR)
 find_package(ONNX)
 
+SET(ONNX_INCLUDE_DIR ${CMAKE_INSTALL_PREFIX}/include/onnx)
+
 function(add_cloned_imported_target dst src)
     add_library(${dst} INTERFACE IMPORTED)
     foreach(name INTERFACE_LINK_LIBRARIES INTERFACE_INCLUDE_DIRECTORIES INTERFACE_COMPILE_DEFINITIONS INTERFACE_COMPILE_OPTIONS)
