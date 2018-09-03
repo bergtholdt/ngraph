@@ -110,3 +110,10 @@ set(ONNX_GIT_BRANCH rel-${ONNX_VERSION})
 # ExternalProject_Get_Property(ext_onnx SOURCE_DIR BINARY_DIR)
 find_package(ONNX)
 
+if (NOT TARGET onnx::libonnx)
+    add_library(onnx::libonnx ALIAS onnx)
+endif()
+
+if (NOT TARGET onnnx::libonnx_proto)
+    add_library(onnx::libonnx_proto ALIAS onnx_proto)
+endif()

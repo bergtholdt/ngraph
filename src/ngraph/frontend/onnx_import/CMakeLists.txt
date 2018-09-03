@@ -77,7 +77,7 @@ add_dependencies(onnx_import onnx_import_interface)
 
 if (NOT NGRAPH_USE_SYSTEM_PROTOBUF)
     add_dependencies(onnx_import_interface protobuf::libprotobuf)
-    add_dependencies(onnx_import_interface libonnx_proto)
+    add_dependencies(onnx_import_interface onnx::libonnx_proto)
 endif()
 
 set_property(TARGET onnx_import PROPERTY POSITION_INDEPENDENT_CODE ON)
