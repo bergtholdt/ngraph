@@ -129,4 +129,7 @@ endif()
 
 if (NOT TARGET onnnx::libonnx_proto)
     add_cloned_imported_target(onnx::libonnx_proto onnx_proto)
+    # expected to import without "onnx/"
+    set_target_properties(onnx::libonnx_proto PROPERTIES
+        INTERFACE_INCLUDE_DIRECTORIES ${CMAKE_INSTALL_PREFIX}/include/onnx)
 endif()
