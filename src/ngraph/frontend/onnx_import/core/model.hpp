@@ -16,7 +16,7 @@
 
 #pragma once
 
-#include <onnx.pb.h>
+#include <onnx/onnx.pb.h>
 #include <ostream>
 
 namespace ngraph
