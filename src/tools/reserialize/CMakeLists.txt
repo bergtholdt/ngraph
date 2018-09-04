@@ -14,6 +14,7 @@
 # limitations under the License.
 # ******************************************************************************
 
+set(CMAKE_CXX_STANDARD 11)
 add_executable(reserialize reserialize.cpp)
 add_dependencies(reserialize ngraph)
-target_link_libraries(reserialize ngraph onnx::libonnx_proto)
+target_link_libraries(reserialize ngraph onnx::libonnx onnx::libonnx_proto protobuf::libprotobuf)

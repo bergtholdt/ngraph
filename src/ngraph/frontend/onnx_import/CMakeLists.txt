@@ -13,6 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 # ******************************************************************************
+set(CMAKE_CXX_STANDARD 11)
 
 add_library(onnx_import_interface OBJECT
         onnx.cpp
@@ -87,6 +88,7 @@ target_link_libraries(onnx_import PUBLIC onnx::libonnx_proto ${Protobuf_LIBRARIE
 set_property(TARGET onnx_import_interface PROPERTY POSITION_INDEPENDENT_CODE ON)
 target_include_directories(onnx_import_interface PRIVATE ${CMAKE_CURRENT_BINARY_DIR}
     ${NGRAPH_INCLUDE_PATH} ${Protobuf_INCLUDE_DIR})
+target_link_libraries(onnx_import_interface PUBLIC onnx::libonnx_proto ${Protobuf_LIBRARIES} ${ONNX_PROTO_LIBRARY})
 
 if ("${CMAKE_CXX_COMPILER_ID}" MATCHES "^(Apple)?Clang$")
     target_compile_options(onnx_import PRIVATE -Wno-undef -Wno-reserved-id-macro -Wno-switch-enum
