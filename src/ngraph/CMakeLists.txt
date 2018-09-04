@@ -226,6 +226,7 @@ if (NOT WIN32)
 endif()
 
 if (NGRAPH_ONNX_IMPORT_ENABLE)
+    message(STATUS "NGRAPH_ONNX_IMPORT_ENABLE is enabled")
     target_sources(ngraph PUBLIC $<TARGET_OBJECTS:onnx_import_interface>)
     target_link_libraries(ngraph PUBLIC onnx_import onnx::libonnx_proto ${Protobuf_LIBRARIES} ${ONNX_PROTO_LIBRARY})
 endif()
