@@ -20,7 +20,7 @@ add_library(onnx_import_interface OBJECT
 
 target_include_directories(onnx_import_interface PRIVATE ${ONNX_PROTO_INCLUDE_DIR})
 
-add_library(onnx_import STATIC
+add_library(onnx_import SHARED
         core/attribute.cpp
         core/attribute.hpp
         core/graph.cpp
