@@ -120,6 +120,13 @@ function(add_cloned_imported_target dst src)
     endforeach()
 endfunction()
 
+function(message_clone src)
+    foreach(name INTERFACE_LINK_LIBRARIES INTERFACE_INCLUDE_DIRECTORIES INTERFACE_COMPILE_DEFINITIONS INTERFACE_COMPILE_OPTIONS)
+        get_property(value TARGET ${src} PROPERTY ${name} )
+        message(STATUS "${src} PROPERTY ${name} ${value}")
+    endforeach()
+endfunction()
+
 # this does not work unfortunately
 # usin recipy from https://github.com/conan-io/conan/issues/2125
 # add_library(onnx::libonnx ALIAS onnx)
@@ -127,6 +134,7 @@ endfunction()
 
 if (NOT TARGET onnx::libonnx)
     add_cloned_imported_target(onnx::libonnx onnx)
+    message_clone(onnx::libonnx)
 endif()
 
 if (NOT TARGET onnnx::libonnx_proto)
@@ -134,4 +142,6 @@ if (NOT TARGET onnnx::libonnx_proto)
     # expected to import without "onnx/"
     set_target_properties(onnx::libonnx_proto PROPERTIES
         INTERFACE_INCLUDE_DIRECTORIES ${CMAKE_INSTALL_PREFIX}/include/onnx)
+    message_clone(onnx::libonnx_proto)
 endif()
+
