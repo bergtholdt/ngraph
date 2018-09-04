@@ -81,8 +81,8 @@ if (NOT NGRAPH_USE_SYSTEM_PROTOBUF)
 endif()
 
 set_property(TARGET onnx_import PROPERTY POSITION_INDEPENDENT_CODE ON)
-target_include_directories(onnx_import PUBLIC ${CMAKE_CURRENT_BINARY_DIR} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR} ${NGRAPH_INCLUDE_PATH} ${ONNX_PROTO_INCLUDE_DIR} ${Protobuf_INCLUDE_DIR})
-target_link_libraries(onnx_import PUBLIC onnx::libonnx_proto PRIVATE ${Protobuf_LIBRARIES} ${ONNX_PROTO_LIBRARY})
+target_include_directories(onnx_import PUBLIC ${CMAKE_CURRENT_BINARY_DIR} ${CMAKE_CURRENT_SOURCE_DIR} ${NGRAPH_INCLUDE_PATH} ${ONNX_PROTO_INCLUDE_DIR} ${Protobuf_INCLUDE_DIR})
+target_link_libraries(onnx_import PUBLIC onnx::libonnx_proto ${Protobuf_LIBRARIES} ${ONNX_PROTO_LIBRARY})
 
 set_property(TARGET onnx_import_interface PROPERTY POSITION_INDEPENDENT_CODE ON)
 target_include_directories(onnx_import_interface PRIVATE ${CMAKE_CURRENT_BINARY_DIR}
